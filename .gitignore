@@ -12,6 +12,8 @@ Thumbs.db
 /.vscode
 /.vagrant
 Homestead.json
+composer.json
+composer.lock
 Homestead.yaml
 npm-debug.log
 sftp-config.json

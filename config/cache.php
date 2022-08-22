@@ -37,6 +37,10 @@ return [
             'driver' => 'apc',
         ],
 
+        'none' => [
+            'driver' => 'null',
+        ],
+
         'array' => [
             'driver' => 'array',
             'serialize' => false,
