@@ -23,6 +23,8 @@
             <div class="row">
                 <div class="col-12">
                     {!! Theme::partial('header.offcanvas-sidebar') !!}
+                    {!! Theme::partial('header.logo-tablet') !!}
+                    {!! Theme::partial('header.logo-mobile') !!}
 
                     <div class="main-nav text-center d-none d-lg-block" style="display: none">
                         <nav>
