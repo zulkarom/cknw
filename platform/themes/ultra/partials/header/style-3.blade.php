@@ -24,8 +24,7 @@
             <div class="row">
                 <div class="col-12">
                     {!! Theme::partial('header.offcanvas-sidebar') !!}
-                    {!! Theme::partial('header.logo-tablet') !!}
-                    {!! Theme::partial('header.logo-mobile') !!}
+  
                     <div class="main-nav text-left d-none d-lg-block">
                         <nav>
                             {!! Menu::renderMenuLocation('main-menu', [
