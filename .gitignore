@@ -6,6 +6,7 @@ public/docs
 public/vendor/core
 /storage/*.key
 /vendor
+/database
 .DS_Store
 Thumbs.db
 /bower_components
