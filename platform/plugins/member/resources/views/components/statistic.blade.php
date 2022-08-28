@@ -7,7 +7,7 @@
                         <span class="fw6">{{ $user->posts()->where('status', \Botble\Base\Enums\BaseStatusEnum::PUBLISHED)->count() }}</span>
                         <span class="fr"><i class="far fa-check-circle"></i></span>
                     </div>
-                    <p>{{ trans('plugins/blog::member.published_posts') }}</p>
+                    <p>Published</p>
                 </div>
             </div>
         </div>
@@ -20,7 +20,7 @@
                         <span class="fw6">{{ $user->posts()->where('status', \Botble\Base\Enums\BaseStatusEnum::PENDING)->count() }}</span>
                         <span class="fr"><i class="fas fa-user-clock"></i></span>
                     </div>
-                    <p>{{ trans('plugins/blog::member.pending_posts') }}</p>
+                    <p>Pending</p>
                 </div>
             </div>
         </div>
@@ -33,7 +33,7 @@
                         <span class="fw6">{{ $user->posts()->where('status', \Botble\Base\Enums\BaseStatusEnum::DRAFT)->count() }}</span>
                         <span class="fr"><i class="far fa-edit"></i></span>
                     </div>
-                    <p>{{ trans('plugins/blog::member.draft_posts') }}</p>
+                    <p>Draft</p>
                 </div>
             </div>
         </div>
