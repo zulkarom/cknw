@@ -35,10 +35,4 @@
     </div>
 @stop
 
-@section('javascript')
-    @include('core/media::partials.media')
-@endsection
 
-@push('footer')
-    @routes
-@endpush

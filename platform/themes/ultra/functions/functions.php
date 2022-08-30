@@ -464,46 +464,46 @@ if (!function_exists('is_video_post')) {
 }
 
 if (is_plugin_active('blog')) {
-    add_filter(BASE_FILTER_BEFORE_RENDER_FORM, function ($form, $data) {
-        if (auth()->user() && get_class($data) == Post::class) {
-            $authors = app()->make(MemberInterface::class)
-                ->allBy([]);
+    // add_filter(BASE_FILTER_BEFORE_RENDER_FORM, function ($form, $data) {
+    //     if (auth()->user() && get_class($data) == Post::class) {
+    //         $authors = app()->make(MemberInterface::class)
+    //             ->allBy([]);
 
-            $authorsArray = [];
-            foreach ($authors as $author) {
-                $authorsArray[$author->id] = $author->getFullName();
-            }
+    //         $authorsArray = [];
+    //         foreach ($authors as $author) {
+    //             $authorsArray[$author->id] = $author->getFullName();
+    //         }
 
-            $form
-                ->setValidatorClass(CustomPostRequest::class)
-                ->addAfter('status', 'author_id', 'customSelect', [
-                    'label'      => __('Author'),
-                    'label_attr' => ['class' => 'control-label required'],
-                    'attr'       => [
-                        'placeholder' => __('Select an author...'),
-                    ],
-                    'choices'    => $authorsArray,
-                ]);
-        }
+    //         $form
+    //             ->setValidatorClass(CustomPostRequest::class)
+    //             ->addAfter('status', 'author_id', 'customSelect', [
+    //                 'label'      => __('Author'),
+    //                 'label_attr' => ['class' => 'control-label required'],
+    //                 'attr'       => [
+    //                     'placeholder' => __('Select an author...'),
+    //                 ],
+    //                 'choices'    => $authorsArray,
+    //             ]);
+    //     }
 
-        return $form;
-    }, 127, 2);
+    //     return $form;
+    // }, 127, 2);
 
-    add_action(BASE_ACTION_AFTER_CREATE_CONTENT, function ($type, $request, $object) {
-        if (auth()->user() && $type == POST_MODULE_SCREEN_NAME) {
-            $object->author_id = $request->input('author_id');
-            $object->author_type = Member::class;
-            $object->save();
-        }
-    }, 123, 3);
+    // add_action(BASE_ACTION_AFTER_CREATE_CONTENT, function ($type, $request, $object) {
+    //     if (auth()->user() && $type == POST_MODULE_SCREEN_NAME) {
+    //         $object->author_id = $request->input('author_id');
+    //         $object->author_type = Member::class;
+    //         $object->save();
+    //     }
+    // }, 123, 3);
 
-    add_action(BASE_ACTION_AFTER_UPDATE_CONTENT, function ($type, $request, $object) {
-        if (auth()->user() && $type == POST_MODULE_SCREEN_NAME) {
-            $object->author_id = $request->input('author_id');
-            $object->author_type = Member::class;
-            $object->save();
-        }
-    }, 123, 3);
+    // add_action(BASE_ACTION_AFTER_UPDATE_CONTENT, function ($type, $request, $object) {
+    //     if (auth()->user() && $type == POST_MODULE_SCREEN_NAME) {
+    //         $object->author_id = $request->input('author_id');
+    //         $object->author_type = Member::class;
+    //         $object->save();
+    //     }
+    // }, 123, 3);
 
     if (!function_exists('get_recent_comment_posts')) {
         /**
@@ -702,3 +702,36 @@ if (!function_exists('is_external_link')) {
         return is_plugin_active('external-source') && !empty($post->external_source_link);
     }
 }
+
+////////////
+
+// add_filter(BASE_FILTER_BEFORE_RENDER_FORM, function ($form, $data)
+// {
+//     if (get_class($data) == \Botble\Blog\Models\Post::class) {
+
+//         $test = \MetaBox::getMetaData($data, 'test', true);
+
+//         $form
+//             ->add('test', 'text', [
+//                 'label'      => __('Test Field'),
+//                 'label_attr' => ['class' => 'control-label'],
+//                 'value'      => $test,
+//                 'attr'       => [
+//                     'placeholder' => __('Test'),
+//                 ],
+//             ]);
+
+//     }
+
+//     return $form;
+// }, 120, 3);
+
+// add_action(BASE_ACTION_AFTER_CREATE_CONTENT, 'save_addition_fields', 120, 3);
+// add_action(BASE_ACTION_AFTER_UPDATE_CONTENT, 'save_addition_fields', 120, 3);
+
+// function save_addition_fields($screen, $request, $data)
+// {
+//     if (get_class($data) == \Botble\Blog\Models\Post::class) {
+//         MetaBox::saveMetaBoxData($data, 'test', $request->input('test'));
+//     }
+// }

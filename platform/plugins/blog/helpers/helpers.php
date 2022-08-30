@@ -9,6 +9,7 @@ use Botble\Blog\Repositories\Interfaces\TagInterface;
 use Botble\Blog\Supports\PostFormat;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
+use Botble\Member\Repositories\Interfaces\MemberInterface;
 
 if (!function_exists('get_featured_posts')) {
     /**
@@ -221,6 +222,26 @@ if (!function_exists('get_categories')) {
         }
 
         return $categories;
+    }
+}
+
+
+if (!function_exists('get_all_authors')) {
+    /**
+     * @return Collection
+     * @throws Exception
+     */
+    function get_all_authors()
+    {
+        $authors = app()->make(MemberInterface::class)
+                ->allBy([]);
+
+            $authorsArray = [];
+            foreach ($authors as $author) {
+                $authorsArray[$author->id] = $author->getFullName();
+            }
+
+        return $authorsArray;
     }
 }
 

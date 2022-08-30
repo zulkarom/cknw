@@ -6,6 +6,7 @@ use Botble\Base\Enums\BaseStatusEnum;
 use Botble\Base\Forms\Fields\TagField;
 use Botble\Base\Forms\FormAbstract;
 use Botble\Blog\Forms\Fields\CategoryMultiField;
+use Botble\Blog\Forms\Fields\AuthorMultiField;
 use Botble\Blog\Http\Requests\PostRequest;
 use Botble\Blog\Models\Post;
 use Botble\Blog\Repositories\Interfaces\CategoryInterface;
@@ -48,6 +49,10 @@ class PostForm extends FormAbstract
             $this->formHelper->addCustomField('categoryMulti', CategoryMultiField::class);
         }
 
+        if (!$this->formHelper->hasCustomField('authorMulti')) {
+            $this->formHelper->addCustomField('authorMulti', AuthorMultiField::class);
+        }
+
         $this
             ->setupModel(new Post())
             ->setValidatorClass(PostRequest::class)
@@ -84,10 +89,17 @@ class PostForm extends FormAbstract
                     'with-short-code' => true,
                 ],
             ])
+            
             ->add('status', 'customSelect', [
                 'label'      => trans('core/base::tables.status'),
                 'label_attr' => ['class' => 'control-label required'],
                 'choices'    => BaseStatusEnum::labels(),
+            ])
+            ->add('authors[]', 'authorMulti', [
+                'label'      => 'Authors',
+                'label_attr' => ['class' => 'control-label required'],
+                'choices'  => get_all_authors(),
+                
             ])
             ->add('categories[]', 'categoryMulti', [
                 'label'      => trans('plugins/blog::posts.form.categories'),
@@ -120,4 +132,5 @@ class PostForm extends FormAbstract
             ]);
         }
     }
+
 }

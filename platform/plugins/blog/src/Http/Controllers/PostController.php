@@ -2,6 +2,7 @@
 
 namespace Botble\Blog\Http\Controllers;
 
+use Assets;
 use Botble\ACL\Models\User;
 use Botble\Base\Events\BeforeEditContentEvent;
 use Botble\Base\Events\CreatedContentEvent;
@@ -130,6 +131,7 @@ class PostController extends BaseController
         event(new BeforeEditContentEvent($request, $post));
 
         page_title()->setTitle(trans('plugins/blog::posts.edit') . ' "' . $post->name . '"');
+        Assets::addScriptsDirectly('custom/au.js');
 
         return $formBuilder->create(PostForm::class, ['model' => $post])->renderForm();
     }
