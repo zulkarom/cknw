@@ -12,6 +12,10 @@ $("#remove-author").click(function(){
     setRemove()
 });
 
+$("#btn-submit").click(function(){
+    $('.modal-member-submit').modal('show');
+});
+
 function setRemove(){
     var count_author;
 
@@ -28,3 +32,4 @@ function setEmptyValue(){
     $(".select-author-one:last").find('select option:selected').attr("selected", null);
     
 }
+

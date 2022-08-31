@@ -128,6 +128,9 @@ class Category extends BaseModel
             case BaseStatusEnum::PENDING:
                 $badge = 'bg-warning';
                 break;
+            case BaseStatusEnum::SUBMIT:
+                $badge = 'bg-primary';
+                break;
             default:
                 $badge = 'bg-success';
                 break;

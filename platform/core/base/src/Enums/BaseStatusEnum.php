@@ -8,11 +8,13 @@ use Html;
 /**
  * @method static BaseStatusEnum DRAFT()
  * @method static BaseStatusEnum PUBLISHED()
- * @method static BaseStatusEnum PENDING()
+ * @method static BaseStatusEnum SUBMIT()
+ * @method static BaseStatusEnum CORRECTION()
+ * @method static BaseStatusEnum 
  */
 class BaseStatusEnum extends Enum
 {
-    public const PUBLISHED = 'published';
+    public const PUBLISHEDx = 'publisheds';
     public const DRAFT = 'draft';
     public const PENDING = 'pending';
     public const SUBMIT = 'submit';

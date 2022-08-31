@@ -10,15 +10,36 @@
     <div class="widget-body">
         <div class="btn-set">
             @php do_action(BASE_ACTION_FORM_ACTIONS, 'default') @endphp
-            <button type="submit" name="submit" value="save" class="btn btn-sm btn-info">
+            <button type="submit" name="submit" value="apply" class="btn btn-sm btn-info">
                 <i class="fa fa-save"></i> {{ trans('core/base::forms.save') }}
             </button>
-            @if (!isset($only_save) || $only_save == false)
                 &nbsp;
-                <button type="submit" name="submit" value="apply" class="btn btn-sm btn-success">
-                    <i class="fa fa-check-circle"></i> {{ trans('core/base::forms.save_and_continue') }}
+                <button type="button" id="btn-submit" class="btn btn-sm btn-success">
+                    <i class="fa fa-check-circle"></i> Submit
                 </button>
-            @endif
         </div>
     </div>
 </div>
+
+<div class="modal fade modal-member-submit" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header bg-warning">
+                <h4 class="modal-title"><i class="til_img"></i><strong>Confirm Submit Post</strong></h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true">
+
+                </button>
+            </div>
+
+            <div class="modal-body with-padding">
+                <div>Do you really want to submit this post?</div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="float-start btn btn-warning" data-bs-dismiss="modal">Cancel</button>
+                <button type="submit" name="submit" value="save" class="float-end btn btn-success" >Submit</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end Modal -->

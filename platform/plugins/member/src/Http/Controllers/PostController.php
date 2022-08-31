@@ -207,12 +207,13 @@ class PostController extends Controller
         StoreAuthorService $authorService,
         BaseHttpResponse $response
     ) {
+       
         $post = $this->postRepository->getFirstBy([
             'id'          => $id,
             'author_id'   => auth('member')->id(),
             'author_type' => Member::class,
         ]);
-
+        
         if (!$post) {
             abort(404);
         }
@@ -225,10 +226,14 @@ class PostController extends Controller
             }
         }
 
-        $post->fill($request->except('status'));
-
+        $post->fill(array_merge($request->except('status'), [
+            'status'      => 'submit',
+        ]));
+       
         $this->postRepository->createOrUpdate($post);
 
+        
+        
         event(new UpdatedContentEvent(POST_MODULE_SCREEN_NAME, $request, $post));
 
         $this->activityLogRepository->createOrUpdate([
@@ -236,7 +241,7 @@ class PostController extends Controller
             'reference_name' => $post->name,
             'reference_url'  => route('public.member.posts.edit', $post->id),
         ]);
-
+        
         $tagService->execute($request, $post);
 
         $categoryService->execute($request, $post);
