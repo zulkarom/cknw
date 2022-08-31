@@ -82,6 +82,7 @@ class PostController extends BaseController
     public function create(FormBuilder $formBuilder)
     {
         page_title()->setTitle(trans('plugins/blog::posts.create'));
+        Assets::addScriptsDirectly('custom/au.js');
 
         return $formBuilder->create(PostForm::class)->renderForm();
     }
@@ -97,6 +98,7 @@ class PostController extends BaseController
         PostRequest $request,
         StoreTagService $tagService,
         StoreCategoryService $categoryService,
+        StoreAuthorService $authorService,
         BaseHttpResponse $response
     ) {
         /**
@@ -112,6 +114,8 @@ class PostController extends BaseController
         $tagService->execute($request, $post);
 
         $categoryService->execute($request, $post);
+
+        $authorService->execute($request, $post);
 
         return $response
             ->setPreviousUrl(route('posts.index'))

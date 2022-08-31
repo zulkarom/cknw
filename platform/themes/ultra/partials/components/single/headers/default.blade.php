@@ -13,11 +13,33 @@
 
     <div class="entry-meta meta-1 font-small color-grey mt-15 mb-15">
         @if (theme_option('enable_show_post_author_detail', 'yes') == 'yes' && class_exists($post->author_type) && $post->author && $post->author->id)
-            <span class="post-by">{{ __('By') }} <a href="{{ $post->author->url }}">{{ $post->author->name }}</a></span>
-        @endif
-        <span class="post-on has-dot">{{ $post->created_at->format(post_date_format()) }}</span>
+        <div class="mb-10">
+
+        <span class="post-on">{{ $post->created_at->format(post_date_format()) }}</span>
         <span class="time-reading has-dot">{{ get_time_to_read($post) }} {{ __('mins read') }}</span>
         <span class="hit-count"><i class="ti-bolt"></i> {{ number_format($post->views) . ' ' . __('views') }}</span>
+
+        </div>
+        <span class="post-by">{{ __('By') }} 
+                @if($post->authors)
+                    @php $i = 1 ; $total = count($post->authors); @endphp
+                    @foreach($post->authors as $author)
+                        @php
+                            $comma = '';
+                            if($i > 1){
+                                if($i == $total){
+                                    $comma = ' & ';
+                                }else{
+                                    $comma = ', ';
+                                }
+                            }
+                        @endphp
+                        {{ $comma }}<a href="{{ $author->url }}">{{ $author->name }}</a>
+                    @php $i++ @endphp
+                    @endforeach
+                @endif
+        </span> 
+        @endif
     </div>
 
     <div class="bt-1 border-color-1 mt-20 mb-20"></div>

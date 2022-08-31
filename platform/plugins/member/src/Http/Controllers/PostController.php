@@ -13,6 +13,7 @@ use Botble\Blog\Models\Post;
 use Botble\Blog\Repositories\Interfaces\PostInterface;
 use Botble\Blog\Repositories\Interfaces\TagInterface;
 use Botble\Blog\Services\StoreCategoryService;
+use Botble\Blog\Services\StoreAuthorService;
 use Botble\Blog\Services\StoreTagService;
 use Botble\Member\Forms\PostForm;
 use Botble\Member\Http\Requests\PostRequest;
@@ -92,6 +93,7 @@ class PostController extends Controller
     public function create(FormBuilder $formBuilder)
     {
         SeoHelper::setTitle(trans('plugins/member::member.write_a_post'));
+        Assets::addScriptsDirectly('custom/au.js');
 
         return $formBuilder->create(PostForm::class)->renderForm();
     }
@@ -109,6 +111,7 @@ class PostController extends Controller
         PostRequest $request,
         StoreTagService $tagService,
         StoreCategoryService $categoryService,
+        StoreAuthorService $authorService,
         BaseHttpResponse $response
     ) {
         if ($request->hasFile('image_input')) {
@@ -139,6 +142,8 @@ class PostController extends Controller
         $tagService->execute($request, $post);
 
         $categoryService->execute($request, $post);
+
+        $authorService->execute($request, $post);
 
         EmailHandler::setModule(MEMBER_MODULE_SCREEN_NAME)
             ->setVariableValues([
@@ -177,6 +182,7 @@ class PostController extends Controller
         event(new BeforeEditContentEvent($request, $post));
 
         SeoHelper::setTitle(trans('plugins/blog::posts.edit') . ' "' . $post->name . '"');
+        Assets::addScriptsDirectly('custom/au.js');
 
         return $formBuilder
             ->create(PostForm::class, ['model' => $post])
@@ -198,6 +204,7 @@ class PostController extends Controller
         PostRequest $request,
         StoreTagService $tagService,
         StoreCategoryService $categoryService,
+        StoreAuthorService $authorService,
         BaseHttpResponse $response
     ) {
         $post = $this->postRepository->getFirstBy([
@@ -233,6 +240,8 @@ class PostController extends Controller
         $tagService->execute($request, $post);
 
         $categoryService->execute($request, $post);
+
+        $authorService->execute($request, $post);
 
         return $response
             ->setPreviousUrl(route('public.member.posts.index'))
