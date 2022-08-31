@@ -7,6 +7,7 @@ use Botble\Base\Traits\EnumCastable;
 use Botble\Base\Enums\BaseStatusEnum;
 use Botble\Revision\RevisionableTrait;
 use Botble\Base\Models\BaseModel;
+use Botble\Member\Models\Member;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
@@ -103,6 +104,15 @@ class Post extends BaseModel
     {
         return $this->belongsToMany(Category::class, 'post_categories');
     }
+
+    /**
+     * @return BelongsToMany
+     */
+    public function authors(): BelongsToMany
+    {
+        return $this->belongsToMany(Member::class, 'post_authors');
+    }
+    
 
     /**
      * @return Category

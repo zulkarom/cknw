@@ -18,6 +18,7 @@ use Botble\Blog\Models\Post;
 use Botble\Blog\Repositories\Interfaces\CategoryInterface;
 use Botble\Blog\Repositories\Interfaces\PostInterface;
 use Botble\Blog\Repositories\Interfaces\TagInterface;
+use Botble\Blog\Services\StoreAuthorService;
 use Botble\Blog\Services\StoreCategoryService;
 use Botble\Blog\Services\StoreTagService;
 use Botble\Blog\Tables\PostTable;
@@ -149,6 +150,7 @@ class PostController extends BaseController
         PostRequest $request,
         StoreTagService $tagService,
         StoreCategoryService $categoryService,
+        StoreAuthorService $authorService,
         BaseHttpResponse $response
     ) {
         $post = $this->postRepository->findOrFail($id);
@@ -162,6 +164,8 @@ class PostController extends BaseController
         $tagService->execute($request, $post);
 
         $categoryService->execute($request, $post);
+
+        $authorService->execute($request, $post);
 
         return $response
             ->setPreviousUrl(route('posts.index'))

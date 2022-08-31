@@ -30,6 +30,11 @@ class PostForm extends FormAbstract
             $selectedCategories = $this->getModel()->categories()->pluck('category_id')->all();
         }
 
+        $selectedAuthors = [];
+        if ($this->getModel()) {
+            $selectedAuthors = $this->getModel()->authors()->pluck('member_id')->all();
+        }
+
         if (empty($selectedCategories)) {
             $selectedCategories = app(CategoryInterface::class)
                 ->getModel()
@@ -99,6 +104,7 @@ class PostForm extends FormAbstract
                 'label'      => 'Authors',
                 'label_attr' => ['class' => 'control-label required'],
                 'choices'  => get_all_authors(),
+                'value'      => old('authors', $selectedAuthors),
                 
             ])
             ->add('categories[]', 'categoryMulti', [
