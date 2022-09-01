@@ -14,7 +14,7 @@ use Html;
  */
 class BaseStatusEnum extends Enum
 {
-    public const PUBLISHEDx = 'publisheds';
+    public const PUBLISHED = 'published';
     public const DRAFT = 'draft';
     public const PENDING = 'pending';
     public const SUBMIT = 'submit';

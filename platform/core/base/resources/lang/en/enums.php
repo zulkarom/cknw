@@ -2,10 +2,10 @@
 
 return [
     'statuses' => [
-        'draft' => 'Draft',
-        'pending' => 'Pending',
-        'publishedk' => 'Publishedx',
-        'submit' => 'Submitx',
-        'correction' => 'Correction'
+        'draft' => 'DRAFT',
+        'pending' => 'PENDING',
+        'published' => 'PUBLISHED',
+        'submit' => 'SUBMIT',
+        'correction' => 'CORRECTION'
     ],
 ];
