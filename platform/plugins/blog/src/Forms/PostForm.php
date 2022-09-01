@@ -94,12 +94,6 @@ class PostForm extends FormAbstract
                     'with-short-code' => true,
                 ],
             ])
-            
-            ->add('status', 'customSelect', [
-                'label'      => trans('core/base::tables.status'),
-                'label_attr' => ['class' => 'control-label required'],
-                'choices'    => BaseStatusEnum::labels(),
-            ])
             ->add('authors[]', 'authorMulti', [
                 'label'      => 'Authors',
                 'label_attr' => ['class' => 'control-label required'],
@@ -107,6 +101,13 @@ class PostForm extends FormAbstract
                 'value'      => old('authors', $selectedAuthors),
                 
             ])
+            
+            ->add('status', 'customSelect', [
+                'label'      => trans('core/base::tables.status'),
+                'label_attr' => ['class' => 'control-label required'],
+                'choices'    => BaseStatusEnum::labels(),
+            ])
+            
             ->add('categories[]', 'categoryMulti', [
                 'label'      => trans('plugins/blog::posts.form.categories'),
                 'label_attr' => ['class' => 'control-label required'],
@@ -131,7 +132,7 @@ class PostForm extends FormAbstract
         $postFormats = get_post_formats(true);
 
         if (count($postFormats) > 1) {
-            $this->addAfter('status', 'format_type', 'customRadio', [
+            $this->addAfter('categories[]', 'format_type', 'customRadio', [
                 'label'      => trans('plugins/blog::posts.form.format_type'),
                 'label_attr' => ['class' => 'control-label'],
                 'choices'    => get_post_formats(true),

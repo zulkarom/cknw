@@ -2,8 +2,8 @@
 @php $authors = $options['choices'] @endphp
 @php $selected_authors = $options['value'] @endphp
 <div class="form-group" id="authors_multi_wrapper" data-emails="" data-max="{{ $maxAuthorCount }}">
-    <label class="text-title-field"
-            for="authors_multi"></label>
+    <label class="text-title-field control-label"
+            for="authors_multi">Author(s)</label>
 
             
         @if($selected_authors)
@@ -51,3 +51,5 @@
 
 </div>
 <a id="add-author" class="link"><small>+ Add Author</small></a> <a id="remove-author" class="link"><small>- Remove Author</small></a>
+
+<br /><br />
