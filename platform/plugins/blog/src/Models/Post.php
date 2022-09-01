@@ -123,6 +123,14 @@ class Post extends BaseModel
     }
 
     /**
+     * @return BelongsTo
+     */
+    public function edition(): BelongsTo
+    {
+        return $this->belongsTo(PostEdition::class, 'post_id')->withDefault();
+    }
+
+    /**
      * @return MorphTo
      */
     public function author(): MorphTo

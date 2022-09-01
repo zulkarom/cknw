@@ -61,4 +61,6 @@ return [
     'bulk_changes' => 'Bulk changes',
     'submit' => 'Submit',
     'please_select_record' => 'Please select at least one record to perform this action!',
+    'volume' => 'Volume',
+    'issue' => 'Issue'
 ];

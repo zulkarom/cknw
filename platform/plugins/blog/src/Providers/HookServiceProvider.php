@@ -8,6 +8,7 @@ use Botble\Base\Enums\BaseStatusEnum;
 use Botble\Base\Models\BaseModel;
 use Botble\Blog\Models\Category;
 use Botble\Blog\Models\Post;
+use Botble\Blog\Models\PostEdition;
 use Botble\Blog\Models\Tag;
 use Botble\Blog\Services\BlogService;
 use Botble\Dashboard\Supports\DashboardWidgetInstance;

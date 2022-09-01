@@ -21,6 +21,10 @@ use Botble\Blog\Models\Tag;
 use Botble\Blog\Repositories\Caches\TagCacheDecorator;
 use Botble\Blog\Repositories\Eloquent\TagRepository;
 use Botble\Blog\Repositories\Interfaces\TagInterface;
+use Botble\Blog\Models\PostEdition;
+use Botble\Blog\Repositories\Caches\EditionCacheDecorator;
+use Botble\Blog\Repositories\Interfaces\EditionInterface;
+use Botble\Blog\Repositories\Eloquent\EditionRepository;
 use Language;
 use Note;
 use SeoHelper;
@@ -45,6 +49,10 @@ class BlogServiceProvider extends ServiceProvider
 
         $this->app->bind(TagInterface::class, function () {
             return new TagCacheDecorator(new TagRepository(new Tag()));
+        });
+
+        $this->app->bind(EditionInterface::class, function () {
+            return new EditionCacheDecorator(new EditionRepository(new PostEdition()));
         });
     }
 
@@ -110,6 +118,14 @@ class BlogServiceProvider extends ServiceProvider
                     'icon'        => null,
                     'url'         => route('tags.index'),
                     'permissions' => ['tags.index'],
+                ])->registerItem([
+                    'id'          => 'cms-plugins-blog-editions',
+                    'priority'    => 4,
+                    'parent_id'   => 'cms-plugins-blog',
+                    'name'        => 'plugins/blog::editions.menu_name',
+                    'icon'        => null,
+                    'url'         => route('editions.index'),
+                    'permissions' => ['editions.index'],
                 ]);
         });
 
@@ -131,6 +147,11 @@ class BlogServiceProvider extends ServiceProvider
             LanguageAdvancedManager::registerModule(Tag::class, [
                 'name',
                 'description',
+            ]);
+
+            LanguageAdvancedManager::registerModule(PostEdtion::class, [
+                'volume',
+                'issue',
             ]);
         }
 
@@ -158,6 +179,7 @@ class BlogServiceProvider extends ServiceProvider
                 'plugins/blog::themes.post',
                 'plugins/blog::themes.category',
                 'plugins/blog::themes.tag',
+                'plugins/blog::themes.edition',
             ], function (View $view) {
                 $view->withShortcodes();
             });

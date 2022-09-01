@@ -50,6 +50,23 @@ Route::group(['namespace' => 'Botble\Blog\Http\Controllers', 'middleware' => ['w
                 'permission' => 'tags.index',
             ]);
         });
+
+        Route::group(['prefix' => 'editions', 'as' => 'editions.'], function () {
+            Route::resource('', 'EditionController')
+                ->parameters(['' => 'edition']);
+
+            Route::delete('items/destroy', [
+                'as'         => 'deletes',
+                'uses'       => 'EditionController@deletes',
+                'permission' => 'editions.destroy',
+            ]);
+
+            Route::get('all', [
+                'as'         => 'all',
+                'uses'       => 'EditionController@getAllEditions',
+                'permission' => 'editions.index',
+            ]);
+        });
     });
 
     if (defined('THEME_MODULE_SCREEN_NAME')) {
