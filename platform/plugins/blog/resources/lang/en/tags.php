@@ -19,3 +19,4 @@ return [
     'edit_this_tag' => 'Edit this tag',
     'menu_name'     => 'Tags',
 ];
+
