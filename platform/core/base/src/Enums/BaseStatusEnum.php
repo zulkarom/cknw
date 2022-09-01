@@ -19,6 +19,7 @@ class BaseStatusEnum extends Enum
     public const PENDING = 'pending';
     public const SUBMIT = 'submit';
     public const CORRECTION = 'correction';
+    public const REVIEW = 'review';
 
     /**
      * @var string
@@ -36,6 +37,9 @@ class BaseStatusEnum extends Enum
                     ->toHtml();
             case self::PENDING:
                 return Html::tag('span', self::PENDING()->label(), ['class' => 'label-warning status-label'])
+                    ->toHtml();
+            case self::REVIEW:
+                return Html::tag('span', self::REVIEW()->label(), ['class' => 'label-warning status-label'])
                     ->toHtml();
             case self::PUBLISHED:
                 return Html::tag('span', self::PUBLISHED()->label(), ['class' => 'label-success status-label'])

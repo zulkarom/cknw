@@ -1,4 +1,7 @@
 <div class="table-actions">
+@if(in_array($item->status, ['draft', 'pending', 'correction']))
+
+
     @if (!empty($edit))
         <a href="{{ route($edit, $item->id) }}" class="btn btn-icon btn-sm btn-primary" data-bs-toggle="tooltip" data-bs-original-title="{{ trans('core/base::tables.edit') }}"><i class="fa fa-edit"></i></a>
     @endif
@@ -8,4 +11,9 @@
             <i class="fa fa-trash"></i>
         </a>
     @endif
+@else 
+
+<a href="{{ $item->url }}?preview=true" target="_blank" class="btn btn-icon btn-sm btn-secondary" data-bs-toggle="tooltip" data-bs-original-title="{{ trans('core/base::tables.edit') }}"><i class="fa fa-search"></i> View</a>
+
+@endif
 </div>
