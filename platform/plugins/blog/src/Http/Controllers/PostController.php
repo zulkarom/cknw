@@ -158,7 +158,7 @@ class PostController extends BaseController
         BaseHttpResponse $response
     ) {
         $post = $this->postRepository->findOrFail($id);
-
+        
         $post->fill($request->input());
 
         $this->postRepository->createOrUpdate($post);

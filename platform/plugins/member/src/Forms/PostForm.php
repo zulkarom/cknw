@@ -39,6 +39,7 @@ class PostForm extends BasePostForm
             ->setValidatorClass(PostRequest::class)
             ->setActionButtons(view('plugins/member::forms.actions')->render())
             ->remove('status')
+            ->remove('edition_id')
             ->remove('is_featured')
             ->remove('content')
             ->remove('image')

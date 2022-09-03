@@ -114,6 +114,11 @@ class PostForm extends FormAbstract
                 'choices'    => get_categories_with_children(),
                 'value'      => old('categories', $selectedCategories),
             ])
+            ->add('edition_id', 'select', [
+                'label'      => 'Edition',
+                'label_attr' => ['class' => 'control-label'],
+                'choices'    => get_all_editions(),
+            ])
             ->add('image', 'mediaImage', [
                 'label'      => trans('core/base::forms.image'),
                 'label_attr' => ['class' => 'control-label'],

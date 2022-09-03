@@ -62,4 +62,13 @@ class PostEdition extends BaseModel
             $postEdition->posts()->detach();
         });
     }
+
+     /**
+     * @return string
+     * @deprecated
+     */
+    public function getEditionName()
+    {
+        return 'Volume ' . $this->volume . ' Issue ' . $this->issue;
+    }
 }

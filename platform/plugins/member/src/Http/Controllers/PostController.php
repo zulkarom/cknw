@@ -226,9 +226,14 @@ class PostController extends Controller
             }
         }
 
-        $post->fill(array_merge($request->except('status'), [
-            'status'      => 'submit',
-        ]));
+        if($request->submit == 'save'){
+            $post->fill(array_merge($request->except('status'), [
+                'status'      => 'submit',
+            ]));
+        }else{
+            $post->fill($request->except('status'));
+        }
+       
        
         $this->postRepository->createOrUpdate($post);
 

@@ -6,6 +6,7 @@ use Botble\Base\Supports\SortItemsWithChildrenHelper;
 use Botble\Blog\Repositories\Interfaces\CategoryInterface;
 use Botble\Blog\Repositories\Interfaces\PostInterface;
 use Botble\Blog\Repositories\Interfaces\TagInterface;
+use Botble\Blog\Repositories\Interfaces\EditionInterface;
 use Botble\Blog\Supports\PostFormat;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
@@ -242,6 +243,25 @@ if (!function_exists('get_all_authors')) {
             }
 
         return $authorsArray;
+    }
+}
+
+if (!function_exists('get_all_editions')) {
+    /**
+     * @return Collection
+     * @throws Exception
+     */
+    function get_all_editions()
+    {
+        $editions = app()->make(EditionInterface::class)
+                ->allBy([]);
+
+            $editionsArray = [];
+            foreach ($editions as $edition) {
+                $editionsArray[$edition->id] = $edition->getEditionName();
+            }
+
+        return $editionsArray;
     }
 }
 

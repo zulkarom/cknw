@@ -71,6 +71,7 @@ class Post extends BaseModel
         'status',
         'author_id',
         'author_type',
+        'edition_id'
     ];
 
     /**
@@ -127,7 +128,7 @@ class Post extends BaseModel
      */
     public function edition(): BelongsTo
     {
-        return $this->belongsTo(PostEdition::class, 'post_id')->withDefault();
+        return $this->belongsTo(PostEdition::class, 'edition_id')->withDefault();
     }
 
     /**
