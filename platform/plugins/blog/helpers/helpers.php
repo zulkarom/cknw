@@ -86,6 +86,18 @@ if (!function_exists('get_posts_by_user')) {
     }
 }
 
+if (!function_exists('get_posts_by_edition')) {
+    /**
+     * @param int $editionId
+     * @param int $paginate
+     * @return Collection
+     */
+    function get_posts_by_edition(int $editionId, int $paginate = 50)
+    {
+        return app(PostInterface::class)->getByEditionId($editionId, $paginate);
+    }
+}
+
 if (!function_exists('get_all_posts')) {
     /**
      * @param boolean $active
@@ -110,6 +122,28 @@ if (!function_exists('get_recent_posts')) {
     function get_recent_posts(int $limit)
     {
         return app(PostInterface::class)->getRecentPosts($limit);
+    }
+}
+
+if (!function_exists('get_recent_editions')) {
+    /**
+     * @param int $limit
+     * @return Collection
+     */
+    function get_recent_editions(bool $active = true, int $limit, array $with = [])
+    {
+        return app(EditionInterface::class)->getRecentEditions(true, $limit, $with);
+    }
+}
+
+if (!function_exists('get_recent_editions')) {
+    /**
+     * @param int $limit
+     * @return Collection
+     */
+    function get_recent_editions(bool $active = true, int $limit, array $with = [])
+    {
+        return app(EditionInterface::class)->getRecentEditions(true, $limit, $with);
     }
 }
 

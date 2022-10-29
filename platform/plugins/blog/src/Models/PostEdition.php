@@ -51,7 +51,7 @@ class PostEdition extends BaseModel
      */
     public function posts(): HasMany
     {
-        return $this->hasMany(Post::class, 'post_id');
+        return $this->hasMany(Post::class, 'edition_id');
     }
 
     protected static function boot()

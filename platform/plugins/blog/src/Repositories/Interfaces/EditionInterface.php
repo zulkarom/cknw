@@ -19,6 +19,8 @@ interface EditionInterface extends RepositoryInterface
      */
     public function getPopularEditions($limit, array $with = ['slugable'], array $withCount = ['posts']);
 
+    public function getRecentEditions($active = true, $limit);
+
     /**
      * @param bool $active
      * @return array

@@ -21,6 +21,9 @@ Route::group(['namespace' => 'Theme\UltraNews\Http\Controllers', 'middleware' =>
 
         Route::get('posts/videos', 'UltraNewsController@getNewsVideos')
             ->name('public.posts-videos');
+        
+        Route::get('issue/{edition}', 'UltraNewsController@getIssue')
+            ->name('public.issue');
 
         Route::get(SlugHelper::getPrefix(Member::class, 'author') . '/{slug}')
             ->uses('UltraNewsController@getAuthor')

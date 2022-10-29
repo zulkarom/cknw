@@ -134,6 +134,18 @@ app()->booted(function () {
             return Theme::partial('shortcodes.recent-posts-admin-config', compact('attributes'));
         });
 
+        //edition-list
+        add_shortcode('edition-list', __('Edition List'), __('Add edition list'), function ($shortcode) {
+            return Theme::partial('shortcodes.edition-list', [
+                'shortcode' => $shortcode,
+            ]);
+        });
+
+        shortcode()->setAdminConfig('edition-list', function ($attributes) {
+            return Theme::partial('shortcodes.edition-list-admin-config', compact('attributes'));
+        });
+
+
         //posts collection
         add_shortcode('posts-collection', __('Posts Collection'), __('Add posts collection'), function ($shortcode) {
             $postCollectionData = app(PostCollectionInterface::class)
@@ -158,6 +170,8 @@ app()->booted(function () {
                 compact('attributes', 'postsCollections')
             );
         });
+
+
 
         //categories tab posts
         add_shortcode(

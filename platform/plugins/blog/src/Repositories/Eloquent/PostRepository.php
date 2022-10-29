@@ -125,6 +125,22 @@ class PostRepository extends RepositoriesAbstract implements PostInterface
     /**
      * {@inheritDoc}
      */
+    public function getByEditionId($editionId, $paginate = 50)
+    {
+        $data = $this->model
+            ->where([
+                'status'    => BaseStatusEnum::PUBLISHED,
+                'edition_id' => $editionId,
+            ])
+            ->with('slugable')
+            ->orderBy('edition_order', 'asc');
+
+        return $this->applyBeforeExecuteQuery($data)->paginate($paginate);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function getDataSiteMap()
     {
         $data = $this->model

@@ -26,6 +26,14 @@ class EditionCacheDecorator extends CacheAbstractDecorator implements EditionInt
     /**
      * {@inheritDoc}
      */
+    public function getRecentEditions($active = true, $limit)
+    {
+        return $this->getDataIfExistCache(__FUNCTION__, func_get_args());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function getAllEditions($active = true)
     {
         return $this->getDataIfExistCache(__FUNCTION__, func_get_args());

@@ -38,6 +38,22 @@ class EditionRepository extends RepositoriesAbstract implements EditionInterface
     /**
      * {@inheritDoc}
      */
+    public function getRecentEditions($active = true, $limit, array $with = ['slugable'], array $withCount = ['editions'])
+    {
+        $data = $this->model;
+        if ($active) {
+            $data = $data->where('status', BaseStatusEnum::PUBLISHED);
+        }
+        $data->orderBy('volume', 'DESC', 'issue', 'DESC')
+        ->limit($limit);
+
+
+        return $this->applyBeforeExecuteQuery($data)->paginate($limit);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function getAllEditions($active = true)
     {
         $data = $this->model;

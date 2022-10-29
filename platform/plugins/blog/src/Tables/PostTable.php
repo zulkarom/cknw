@@ -85,8 +85,11 @@ class PostTable extends TableAbstract
             ->editColumn('checkbox', function ($item) {
                 return $this->getCheckbox($item->id);
             })
-            ->editColumn('created_at', function ($item) {
-                return BaseHelper::formatDate($item->created_at);
+            ->editColumn('edition_id', function ($item) {
+                if($item->edition && $item->edition_id > 0){
+                    return $item->edition->getEditionName();
+                }
+                
             })
             ->editColumn('updated_at', function ($item) {
                 $categories = '';
@@ -124,6 +127,7 @@ class PostTable extends TableAbstract
                     $query->select(['categories.id', 'categories.name']);
                 },
                 'author',
+                'edition',
             ])
             ->select([
                 'id',
@@ -134,6 +138,7 @@ class PostTable extends TableAbstract
                 'updated_at',
                 'author_id',
                 'author_type',
+                'edition_id',
             ]);
 
         return $this->applyScopes($query);
@@ -169,8 +174,8 @@ class PostTable extends TableAbstract
                 'class'     => 'no-sort text-center',
                 'orderable' => false,
             ],
-            'created_at' => [
-                'title' => trans('core/base::tables.created_at'),
+            'edition_id' => [
+                'title' => 'Edition',
                 'width' => '100px',
                 'class' => 'text-center',
             ],
@@ -221,9 +226,9 @@ class PostTable extends TableAbstract
                 'validate' => 'required',
                 'callback' => 'getCategories',
             ],
-            'created_at' => [
-                'title'    => trans('core/base::tables.created_at'),
-                'type'     => 'date',
+            'edition_id' => [
+                'title'    => 'Edition',
+                'type'     => 'select-search',
                 'validate' => 'required',
             ],
         ];

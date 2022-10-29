@@ -5,6 +5,7 @@ namespace Theme\UltraNews\Http\Controllers;
 use Auth;
 use Botble\Base\Enums\BaseStatusEnum;
 use Botble\Base\Http\Responses\BaseHttpResponse;
+use Botble\Blog\Repositories\Interfaces\EditionInterface;
 use Botble\Blog\Repositories\Interfaces\PostInterface;
 use Botble\Member\Models\Member;
 use Botble\Member\Repositories\Interfaces\MemberInterface;
@@ -19,6 +20,24 @@ use Theme;
 
 class UltraNewsController extends PublicController
 {
+    /**
+     * @var EditionInterface
+     */
+    protected $editionRepository;
+
+    /**
+     * @param PostInterface $postRepository
+     * @param TagInterface $tagRepository
+     * @param CategoryInterface $categoryRepository
+     */
+    public function __construct(
+        EditionInterface $editionRepository
+    ) {
+        $this->editionRepository = $editionRepository;
+    }
+
+
+
     /**
      * @param Request $request
      * @param BaseHttpResponse $response
@@ -117,5 +136,28 @@ class UltraNewsController extends PublicController
         $postsLayout = 'metro';
 
         return Theme::scope('videos', compact('posts', 'postsLayout'))->render();
+    }
+
+    /**
+     * @return \Response
+     */
+    public function getIssue($edition)
+    {
+        $e = $this->editionRepository->findOrFail($edition);
+        SeoHelper::setTitle($e->getEditionName());
+        Theme::breadcrumb()->add(__('Issue'), url('issues'))->add($e->getEditionName());
+
+        $posts = app(PostInterface::class)->advancedGet([
+            'condition' => [
+                'posts.edition_id' => $edition,
+            ],
+            'paginate'  => [
+                'per_page'      => 50,
+                'current_paged' => (int)request()->input('page', 1),
+            ],
+            'order_by'  => ['edition_order' => 'ASC'],
+        ]);
+
+        return Theme::scope('issue', compact('posts'))->render();
     }
 }

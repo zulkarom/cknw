@@ -43,6 +43,13 @@ interface PostInterface extends RepositoryInterface
      */
     public function getByUserId($authorId, $limit = 6);
 
+     /**
+     * @param int $editionId
+     * @param int $limit
+     * @return mixed
+     */
+    public function getByEditionId($editionId, $limit = 50);
+
     /**
      * @return mixed
      */
