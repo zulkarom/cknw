@@ -40,6 +40,7 @@ class PostForm extends BasePostForm
             ->setActionButtons(view('plugins/member::forms.actions')->render())
             ->remove('status')
             ->remove('edition_id')
+            ->remove('edition_order')
             ->remove('is_featured')
             ->remove('content')
             ->remove('image')

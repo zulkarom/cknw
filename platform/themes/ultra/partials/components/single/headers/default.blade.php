@@ -16,7 +16,7 @@
         <div class="mb-10">
 
         <span class="post-on">{{ $post->created_at->format(post_date_format()) }}</span>
-        <span class="time-reading has-dot">{{ get_time_to_read($post) }} {{ __('mins read') }}</span>
+        <span class="time-reading has-dot"><a href="{{ url('/issue') }}/{{$post->edition_id}}">{{ $post->edition->getEditionName() }}</a></span>
         <span class="hit-count"><i class="ti-bolt"></i> {{ number_format($post->views) . ' ' . __('views') }}</span>
 
         </div>

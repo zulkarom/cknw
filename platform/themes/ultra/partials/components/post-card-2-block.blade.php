@@ -39,8 +39,8 @@
         <div class="entry-meta meta-1 font-small color-grey mt-15 mb-15 d-flex">
             <span class="post-on">{{ $post->created_at->format(post_date_format()) }}</span>
             <span class="time-reading">
-                <i class="ti-timer"></i>
-                {{ get_time_to_read($post) }} {{ __('mins read') }}
+            <i class="ti-file"></i>
+                <a href="{{ url('/issue') }}/{{$post->edition_id}}">{{ $post->edition->getEditionName() }}</a>
             </span>
             <span class="hit-count"><i class="ti-bolt"></i>{{ number_format($post->views) . ' ' . __('views') }}</span>
         </div>

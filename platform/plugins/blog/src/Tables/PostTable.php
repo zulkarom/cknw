@@ -87,8 +87,12 @@ class PostTable extends TableAbstract
             })
             ->editColumn('edition_id', function ($item) {
                 if($item->edition && $item->edition_id > 0){
-                    return $item->edition->getEditionName();
+                    return  '<span style="font-size:12px">' . $item->edition->getEditionName() . '</span>';
                 }
+                
+            })
+            ->editColumn('edition_order', function ($item) {
+                    return $item->edition_order;
                 
             })
             ->editColumn('updated_at', function ($item) {
@@ -100,7 +104,12 @@ class PostTable extends TableAbstract
                 return rtrim($categories, ', ');
             })
             ->editColumn('author_id', function ($item) {
-                return $item->author && $item->author->name ? BaseHelper::clean($item->author->name) : '&mdash;';
+                $authors = '';
+                foreach ($item->authors as $author) {
+                    $authors .= '<span style="font-size:12px">' . $author->first_name . ' ' . $author->last_name .  '</span>, ';
+                }
+
+                return rtrim($authors, ', ');
             })
             ->editColumn('status', function ($item) {
                 if ($this->request()->input('action') === 'excel') {
@@ -139,6 +148,7 @@ class PostTable extends TableAbstract
                 'author_id',
                 'author_type',
                 'edition_id',
+                'edition_order'
             ]);
 
         return $this->applyScopes($query);
@@ -176,6 +186,11 @@ class PostTable extends TableAbstract
             ],
             'edition_id' => [
                 'title' => 'Edition',
+                'width' => '100px',
+                'class' => 'text-center',
+            ],
+            'edition_order' => [
+                'title' => 'Order',
                 'width' => '100px',
                 'class' => 'text-center',
             ],

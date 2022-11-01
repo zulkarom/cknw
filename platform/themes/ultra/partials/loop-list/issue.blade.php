@@ -5,8 +5,14 @@
             @if(!empty($posts) && $posts->total() > 0)
         <div class="loop-list loop-list-1">
 
+        @if($posts->first())
+                <article class="first-post mb-50 animate-conner">
+                    {!! Theme::partial('components.post-card-1-block-editor', ['post' => $posts->first()]) !!}
+                </article>
+            @endif
 
-            @foreach($posts as $post)
+
+            @foreach($posts->slice(1) as $post)
                 <article class="row mb-50">
                     {!! Theme::partial('components.post-card-2-block-long', ['post' => $post]) !!}
                 </article>

@@ -36,13 +36,36 @@
                 {{ $post->name }}
             </a>
         </h4>
-        <div class="entry-meta meta-1 font-small color-grey mt-15 mb-15 d-flex">
+        <div class="entry-meta meta-1 font-small color-grey mt-15 mb-15">
             <span class="post-on">{{ $post->created_at->format(post_date_format()) }}</span>
             <span class="time-reading">
-                <i class="ti-timer"></i>
-                {{ get_time_to_read($post) }} {{ __('mins read') }}
+                <i class="ti-file"></i>
+                <a href="{{ url('/issue') }}/{{$post->edition_id}}">{{ $post->edition->getEditionName() }}</a>
             </span>
             <span class="hit-count"><i class="ti-bolt"></i>{{ number_format($post->views) . ' ' . __('views') }}</span>
+<div class="mt-10">
+<span class="post-by">{{ __('By') }} 
+                @if($post->authors)
+                    @php $i = 1 ; $total = count($post->authors); @endphp
+                    @foreach($post->authors as $author)
+                        @php
+                            $comma = '';
+                            if($i > 1){
+                                if($i == $total){
+                                    $comma = ' & ';
+                                }else{
+                                    $comma = ', ';
+                                }
+                            }
+                        @endphp
+                        {{ $comma }}<a href="{{ $author->url }}">{{ $author->name }}</a>
+                    @php $i++ @endphp
+                    @endforeach
+                @endif
+        </span> 
+</div>
+           
+
         </div>
         <p class="font-medium">{!! clean($post->description) !!}</p>
         @if(isset($showReadMoreText) ? $showReadMoreText : true)

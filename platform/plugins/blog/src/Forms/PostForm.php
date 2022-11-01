@@ -119,6 +119,10 @@ class PostForm extends FormAbstract
                 'label_attr' => ['class' => 'control-label'],
                 'choices'    => get_all_editions(),
             ])
+            ->add('edition_order', 'text', [
+                'label'      => 'Order',
+                'label_attr' => ['class' => 'control-label'],
+            ])
             ->add('image', 'mediaImage', [
                 'label'      => trans('core/base::forms.image'),
                 'label_attr' => ['class' => 'control-label'],
