@@ -275,7 +275,7 @@ if (!function_exists('get_all_authors')) {
             foreach ($authors as $author) {
                 $authorsArray[$author->id] = $author->getFullName();
             }
-
+        //sort($authorsArray);
         return $authorsArray;
     }
 }
