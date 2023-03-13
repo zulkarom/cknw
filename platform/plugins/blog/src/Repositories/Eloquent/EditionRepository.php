@@ -44,7 +44,7 @@ class EditionRepository extends RepositoriesAbstract implements EditionInterface
         if ($active) {
             $data = $data->where('status', BaseStatusEnum::PUBLISHED);
         }
-        $data->orderBy('volume', 'DESC', 'issue', 'DESC')
+        $data->orderByRaw('volume DESC, issue DESC')
         ->limit($limit);
 
 
