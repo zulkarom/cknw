@@ -37,7 +37,7 @@
             </a>
         </h4>
         <div class="entry-meta meta-1 font-small color-grey mt-15 mb-15">
-            <span class="post-on">{{ $post->created_at->format(post_date_format()) }}</span>
+            <span class="post-on">{{ $post->published_at->format(post_date_format()) }}</span>
             <span class="time-reading">
                 <i class="ti-file"></i>
                 <a href="{{ url('/issue') }}/{{$post->edition_id}}">{{ $post->edition->getEditionName() }}</a>

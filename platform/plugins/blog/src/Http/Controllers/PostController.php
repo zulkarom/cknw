@@ -22,6 +22,7 @@ use Botble\Blog\Services\StoreAuthorService;
 use Botble\Blog\Services\StoreCategoryService;
 use Botble\Blog\Services\StoreTagService;
 use Botble\Blog\Tables\PostTable;
+use Botble\Member\Models\Member;
 use Exception;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\Request;
@@ -101,14 +102,24 @@ class PostController extends BaseController
         StoreAuthorService $authorService,
         BaseHttpResponse $response
     ) {
+        //make title uppercase
+        $title = strtoupper($request->input('name'));
+
+        $first_author = 0;
+        $authors = $request->input('authors');
+        if($authors){
+            $first_author = $authors[0];
+        }
+        
         /**
          * @var Post $post
          */
         $post = $this->postRepository->createOrUpdate(array_merge($request->input(), [
-            'author_id'   => Auth::id(),
-            'author_type' => User::class,
+            'author_id'   =>  $first_author,
+            'author_type' => Member::class,
+            'name' => $title,
         ]));
-
+        
         event(new CreatedContentEvent(POST_MODULE_SCREEN_NAME, $request, $post));
 
         $tagService->execute($request, $post);
@@ -157,11 +168,25 @@ class PostController extends BaseController
         StoreAuthorService $authorService,
         BaseHttpResponse $response
     ) {
+        //make title uppercase
+        $title = strtoupper($request->input('name'));
+        //make first author
+        $first_author = 0;
+        $authors = $request->input('authors');
+        if($authors){
+            $first_author = $authors[0];
+        }
+
         $post = $this->postRepository->findOrFail($id);
         
-        $post->fill($request->input());
+        $post->fill(array_merge($request->input(), [
+            'name' => $title,
+            'author_id'   =>  $first_author,
+        ]));
 
         $this->postRepository->createOrUpdate($post);
+
+
 
         event(new UpdatedContentEvent(POST_MODULE_SCREEN_NAME, $request, $post));
 

@@ -54,6 +54,7 @@ class Post extends BaseModel
     protected $dates = [
         'created_at',
         'updated_at',
+        'published_at',
     ];
 
     /**
