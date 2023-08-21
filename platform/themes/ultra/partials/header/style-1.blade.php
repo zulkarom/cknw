@@ -9,8 +9,7 @@
                         <a href="{{ route('public.index') }}">
                             <img class="img-logo d-inline"
                                  src="{{ RvMedia::getImageUrl(theme_option('logo')) }}"
-                                 alt="{{ setting('site_title') }}"><br />
-                                 <span class="font-small">eISSN: 2948-5037</span>
+                                 alt="{{ setting('site_title') }}">
                         </a>
                     </div>
                 </div>
