@@ -8,7 +8,7 @@
                     <div class="col-12">
                         <a href="{{ route('public.index') }}">
                             <img class="img-logo d-inline"
-                                 src="{{ RvMedia::getImageUrl(theme_option('logo')) }}"
+                                 src="{{ RvMedia::getImageUrl(theme_option('logo')) }}?r=353"
                                  alt="{{ setting('site_title') }}">
                         </a>
                     </div>
