@@ -150,6 +150,7 @@ class UltraNewsController extends PublicController
         $posts = app(PostInterface::class)->advancedGet([
             'condition' => [
                 'posts.edition_id' => $edition,
+                'posts.status' => 'published'
             ],
             'paginate'  => [
                 'per_page'      => 50,
