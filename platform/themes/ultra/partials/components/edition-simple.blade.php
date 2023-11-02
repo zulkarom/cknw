@@ -3,6 +3,6 @@
     <div class="entry-meta meta-1 font-x-small color-grey d-flex">
         <span class="post-on"><i class="ti-timer"></i> {{ $edition->getEditionName() }} </span> 
 
-        <span class="post-on"><i class="ti-file"></i> {{ count($edition->posts) }} Articles</span>
+        <span class="post-on"><i class="ti-file"></i> {{ count($edition->publishedPosts) }} Articles</span>
     </div>
 </div>

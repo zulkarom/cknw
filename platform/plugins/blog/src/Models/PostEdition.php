@@ -5,6 +5,7 @@ namespace Botble\Blog\Models;
 use Botble\Base\Traits\EnumCastable;
 use Botble\Base\Enums\BaseStatusEnum;
 use Botble\Base\Models\BaseModel;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class PostEdition extends BaseModel
@@ -52,6 +53,12 @@ class PostEdition extends BaseModel
     public function posts(): HasMany
     {
         return $this->hasMany(Post::class, 'edition_id');
+    }
+
+    public function publishedPosts(): HasMany
+    {
+        return $this->hasMany(Post::class, 'edition_id')
+        ->where('status', BaseStatusEnum::PUBLISHED());
     }
 
     protected static function boot()
