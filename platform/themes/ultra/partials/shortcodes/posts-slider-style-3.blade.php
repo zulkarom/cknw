@@ -26,7 +26,7 @@
                                                 </h1>
                                                 <div class="entry-meta meta-1 font-small color-white mt-20 mb-20">
                                                 <span class="post-on">
-                                                    <i class="ti-marker-alt"></i>{{ $post->created_at->format(post_date_format()) }}
+                                                    <i class="ti-marker-alt"></i>{{ $post->published_at->format(post_date_format()) }}
                                                 </span>
                                                     <span class="hit-count">
                                                     <i class="ti-bolt"></i>{{ number_format($post->views) }} {{ __('views') }}

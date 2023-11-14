@@ -21,7 +21,7 @@
                                             <h2 class="post-title"><a href="{{ get_external_link($post) }}" {{ is_external_link($post) ? 'target="_blank"' : '' }}>{{ $post->name }}</a></h2>
                                             <div class="entry-meta meta-1 font-small color-grey mt-20 mb-20">
                                                 <span class="post-on">
-                                                    <i class="ti-marker-alt"></i>{{ $post->created_at->format(post_date_format()) }}
+                                                    <i class="ti-marker-alt"></i>{{ $post->published_at->format(post_date_format()) }}
                                                 </span>
                                                 <span class="hit-count">
                                                     <i class="ti-bolt"></i>{{ number_format($post->views) }} {{ __('views') }}

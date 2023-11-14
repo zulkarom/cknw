@@ -25,7 +25,7 @@
                         <a class="color-white" href="{{ get_external_link($post) }}" {{ is_external_link($post) ? 'target="_blank"' : '' }}>{{ $post->name }}</a>
                     </h3>
                     <div class="entry-meta meta-1 font-small color-grey mt-10 pr-5 pl-5">
-                        <span class="post-on">{{ $post->created_at->format(post_date_format(false)) }}</span>
+                        <span class="post-on">{{ $post->published_at->format(post_date_format(false)) }}</span>
                         <span class="hit-count has-dot">{{ number_format($post->views) }} {{ __('views') }}</span>
                         <a class="float-right" href="#"><i class="ti-heart"></i></a>
                     </div>

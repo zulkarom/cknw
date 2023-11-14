@@ -17,7 +17,7 @@
                 <div class="post-content media-body">
                     <h6 class="post-title mb-10 text-limit-2-row">{{ $post->name }}</h6>
                     <div class="entry-meta meta-1 font-x-small color-grey d-flex">
-                        <span class="post-on">{{ $post->created_at->format(post_date_format(false)) }}</span>
+                        <span class="post-on">{{ $post->published_at->format(post_date_format(false)) }}</span>
                         <span class="hit-count has-dot">{{ number_format($post->views) . ' ' . __('views') }}</span>
                     </div>
                 </div>
